@@ -45,6 +45,8 @@
 
 /* USER CODE BEGIN PV */
 uint8_t znak;
+uint8_t kom[33];
+uint16_t dl_kom;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -144,10 +146,19 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	if(huart->Instance == USART2){
 		if (znak == 'e'){
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+			sprintf(kom, "otrzymano e (0x65)");
+			dl_kom = 18;
 		}
 		else if (znak == 'd'){
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+			sprintf(kom, "otrzymano d (0x64)");
+			dl_kom = 18;
 		}
+		else {
+			sprintf(kom, "otrzymano znak rozny od d lub e");
+			dl_kom = 33;
+		}
+		HAL_UART_Transmit_IT(&huart2, &kom, dl_kom);
 		HAL_UART_Receive_IT(&huart2, &znak, 1);
 	}
 }
