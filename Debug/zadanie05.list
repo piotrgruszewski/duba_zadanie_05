@@ -7,23 +7,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00002718  0800010c  0800010c  0001010c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000000a4  08002824  08002824  00012824  2**2
+  2 .rodata       000000a0  08002824  08002824  00012824  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080028c8  080028c8  00020070  2**0
+  3 .ARM.extab    00000000  080028c4  080028c4  00020070  2**0
                   CONTENTS
-  4 .ARM          00000000  080028c8  080028c8  00020070  2**0
+  4 .ARM          00000000  080028c4  080028c4  00020070  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080028c8  080028c8  00020070  2**0
+  5 .preinit_array 00000000  080028c4  080028c4  00020070  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080028c8  080028c8  000128c8  2**2
+  6 .init_array   00000004  080028c4  080028c4  000128c4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080028cc  080028cc  000128cc  2**2
+  7 .fini_array   00000004  080028c8  080028c8  000128c8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000070  20000000  080028d0  00020000  2**2
+  8 .data         00000070  20000000  080028cc  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000000a8  20000070  08002940  00020070  2**2
+  9 .bss          000000a8  20000070  0800293c  00020070  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000118  08002940  00020118  2**0
+ 10 ._user_heap_stack 00000600  20000118  0800293c  00020118  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
@@ -359,48 +359,48 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  80002e0:	4a1d      	ldr	r2, [pc, #116]	; (8000358 <HAL_UART_RxCpltCallback+0x84>)
  80002e2:	4293      	cmp	r3, r2
  80002e4:	d134      	bne.n	8000350 <HAL_UART_RxCpltCallback+0x7c>
-		if (znak == 'e'){
+		if (znak == 'd'){
  80002e6:	4b1d      	ldr	r3, [pc, #116]	; (800035c <HAL_UART_RxCpltCallback+0x88>)
  80002e8:	781b      	ldrb	r3, [r3, #0]
- 80002ea:	2b65      	cmp	r3, #101	; 0x65
+ 80002ea:	2b64      	cmp	r3, #100	; 0x64
  80002ec:	d10c      	bne.n	8000308 <HAL_UART_RxCpltCallback+0x34>
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
  80002ee:	2201      	movs	r2, #1
  80002f0:	2120      	movs	r1, #32
  80002f2:	481b      	ldr	r0, [pc, #108]	; (8000360 <HAL_UART_RxCpltCallback+0x8c>)
  80002f4:	f000 fd2a 	bl	8000d4c <HAL_GPIO_WritePin>
-			sprintf(kom, "otrzymano e (0x65)");
+			sprintf(kom, "otrzymano d\n");
  80002f8:	491a      	ldr	r1, [pc, #104]	; (8000364 <HAL_UART_RxCpltCallback+0x90>)
  80002fa:	481b      	ldr	r0, [pc, #108]	; (8000368 <HAL_UART_RxCpltCallback+0x94>)
  80002fc:	f001 fe4c 	bl	8001f98 <siprintf>
-			dl_kom = 18;
+			dl_kom = 12;
  8000300:	4b1a      	ldr	r3, [pc, #104]	; (800036c <HAL_UART_RxCpltCallback+0x98>)
- 8000302:	2212      	movs	r2, #18
+ 8000302:	220c      	movs	r2, #12
  8000304:	801a      	strh	r2, [r3, #0]
  8000306:	e017      	b.n	8000338 <HAL_UART_RxCpltCallback+0x64>
 		}
-		else if (znak == 'd'){
+		else if (znak == 'e'){
  8000308:	4b14      	ldr	r3, [pc, #80]	; (800035c <HAL_UART_RxCpltCallback+0x88>)
  800030a:	781b      	ldrb	r3, [r3, #0]
- 800030c:	2b64      	cmp	r3, #100	; 0x64
+ 800030c:	2b65      	cmp	r3, #101	; 0x65
  800030e:	d10c      	bne.n	800032a <HAL_UART_RxCpltCallback+0x56>
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
  8000310:	2200      	movs	r2, #0
  8000312:	2120      	movs	r1, #32
  8000314:	4812      	ldr	r0, [pc, #72]	; (8000360 <HAL_UART_RxCpltCallback+0x8c>)
  8000316:	f000 fd19 	bl	8000d4c <HAL_GPIO_WritePin>
-			sprintf(kom, "otrzymano d (0x64)");
+			sprintf(kom, "otrzymano e\n");
  800031a:	4915      	ldr	r1, [pc, #84]	; (8000370 <HAL_UART_RxCpltCallback+0x9c>)
  800031c:	4812      	ldr	r0, [pc, #72]	; (8000368 <HAL_UART_RxCpltCallback+0x94>)
  800031e:	f001 fe3b 	bl	8001f98 <siprintf>
-			dl_kom = 18;
+			dl_kom = 12;
  8000322:	4b12      	ldr	r3, [pc, #72]	; (800036c <HAL_UART_RxCpltCallback+0x98>)
- 8000324:	2212      	movs	r2, #18
+ 8000324:	220c      	movs	r2, #12
  8000326:	801a      	strh	r2, [r3, #0]
  8000328:	e006      	b.n	8000338 <HAL_UART_RxCpltCallback+0x64>
 		}
 		else {
-			sprintf(kom, "otrzymano znak rozny od d lub e");
+			sprintf(kom, "otrzymano znak rozny od d lub e\n");
  800032a:	4912      	ldr	r1, [pc, #72]	; (8000374 <HAL_UART_RxCpltCallback+0xa0>)
  800032c:	480e      	ldr	r0, [pc, #56]	; (8000368 <HAL_UART_RxCpltCallback+0x94>)
  800032e:	f001 fe33 	bl	8001f98 <siprintf>
@@ -433,8 +433,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  8000364:	08002824 	.word	0x08002824
  8000368:	20000098 	.word	0x20000098
  800036c:	200000ba 	.word	0x200000ba
- 8000370:	08002838 	.word	0x08002838
- 8000374:	0800284c 	.word	0x0800284c
+ 8000370:	08002834 	.word	0x08002834
+ 8000374:	08002844 	.word	0x08002844
  8000378:	200000c0 	.word	0x200000c0
 
 0800037c <Error_Handler>:
@@ -1071,7 +1071,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  80005f0:	20000070 	.word	0x20000070
   ldr r2, =_sidata
- 80005f4:	080028d0 	.word	0x080028d0
+ 80005f4:	080028cc 	.word	0x080028cc
   ldr r2, =_sbss
  80005f8:	20000070 	.word	0x20000070
   ldr r4, =_ebss
@@ -3678,7 +3678,7 @@ if (((RCC_ClkInitStruct->ClockType) & RCC_CLOCKTYPE_PCLK1) == RCC_CLOCKTYPE_PCLK
  800147e:	bf00      	nop
  8001480:	40022000 	.word	0x40022000
  8001484:	40021000 	.word	0x40021000
- 8001488:	0800287c 	.word	0x0800287c
+ 8001488:	08002878 	.word	0x08002878
  800148c:	20000000 	.word	0x20000000
  8001490:	20000004 	.word	0x20000004
 
@@ -3826,7 +3826,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  800153e:	bc90      	pop	{r4, r7}
  8001540:	4770      	bx	lr
  8001542:	bf00      	nop
- 8001544:	0800286c 	.word	0x0800286c
+ 8001544:	08002868 	.word	0x08002868
  8001548:	40021000 	.word	0x40021000
  800154c:	007a1200 	.word	0x007a1200
  8001550:	003d0900 	.word	0x003d0900
@@ -3874,7 +3874,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8001584:	4618      	mov	r0, r3
  8001586:	bd80      	pop	{r7, pc}
  8001588:	40021000 	.word	0x40021000
- 800158c:	0800288c 	.word	0x0800288c
+ 800158c:	08002888 	.word	0x08002888
 
 08001590 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -3900,7 +3900,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  80015ac:	4618      	mov	r0, r3
  80015ae:	bd80      	pop	{r7, pc}
  80015b0:	40021000 	.word	0x40021000
- 80015b4:	0800288c 	.word	0x0800288c
+ 80015b4:	08002888 	.word	0x08002888
 
 080015b8 <RCC_Delay>:
   * @brief  This function provides delay (in milliseconds) based on CPU cycles method.
@@ -5673,10 +5673,10 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8001f72:	4798      	blx	r3
  8001f74:	3601      	adds	r6, #1
  8001f76:	e7f2      	b.n	8001f5e <__libc_init_array+0x1e>
- 8001f78:	080028c8 	.word	0x080028c8
- 8001f7c:	080028c8 	.word	0x080028c8
- 8001f80:	080028c8 	.word	0x080028c8
- 8001f84:	080028cc 	.word	0x080028cc
+ 8001f78:	080028c4 	.word	0x080028c4
+ 8001f7c:	080028c4 	.word	0x080028c4
+ 8001f80:	080028c4 	.word	0x080028c4
+ 8001f84:	080028c8 	.word	0x080028c8
 
 08001f88 <memset>:
  8001f88:	4603      	mov	r3, r0
@@ -5994,11 +5994,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  8002274:	f000 f87c 	bl	8002370 <_printf_i>
  8002278:	e7eb      	b.n	8002252 <_svfiprintf_r+0x1c2>
  800227a:	bf00      	nop
- 800227c:	08002894 	.word	0x08002894
- 8002280:	0800289e 	.word	0x0800289e
+ 800227c:	08002890 	.word	0x08002890
+ 8002280:	0800289a 	.word	0x0800289a
  8002284:	00000000 	.word	0x00000000
  8002288:	08001fd9 	.word	0x08001fd9
- 800228c:	0800289a 	.word	0x0800289a
+ 800228c:	08002896 	.word	0x08002896
 
 08002290 <_printf_common>:
  8002290:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -6335,8 +6335,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  80025ac:	2500      	movs	r5, #0
  80025ae:	f104 0619 	add.w	r6, r4, #25
  80025b2:	e7f5      	b.n	80025a0 <_printf_i+0x230>
- 80025b4:	080028a5 	.word	0x080028a5
- 80025b8:	080028b6 	.word	0x080028b6
+ 80025b4:	080028a1 	.word	0x080028a1
+ 80025b8:	080028b2 	.word	0x080028b2
 
 080025bc <memchr>:
  80025bc:	4603      	mov	r3, r0

@@ -144,18 +144,18 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	if(huart->Instance == USART2){
-		if (znak == 'e'){
+		if (znak == 'd'){
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-			sprintf(kom, "otrzymano e (0x65)");
-			dl_kom = 18;
+			sprintf(kom, "otrzymano d\n");
+			dl_kom = 12;
 		}
-		else if (znak == 'd'){
+		else if (znak == 'e'){
 			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-			sprintf(kom, "otrzymano d (0x64)");
-			dl_kom = 18;
+			sprintf(kom, "otrzymano e\n");
+			dl_kom = 12;
 		}
 		else {
-			sprintf(kom, "otrzymano znak rozny od d lub e");
+			sprintf(kom, "otrzymano znak rozny od d lub e\n");
 			dl_kom = 33;
 		}
 		HAL_UART_Transmit_IT(&huart2, &kom, dl_kom);
